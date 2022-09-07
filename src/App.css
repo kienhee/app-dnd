@@ -1,38 +1,219 @@
-.App {
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+}
+
+body {
+  font-family: 'Poppins';
+  font-weight: 400;
+  line-height: 1.5;
+  color: #000;
+  font-size: 16px;
+}
+
+button {
+  outline: none;
+  border: none;
+}
+
+.heading {
   text-align: center;
+  color: #5680f9;
+  margin: 25px 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  max-width: 1170px;
+  padding: 0 15px;
+  margin: 0 auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.body-app {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 50px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.column {
+  width: 100%;
+  background-color: #f7f8fe;
+  min-height: 50px;
+  padding: 10px 20px;
+  min-height: 375px;
+  height: fit-content;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+}
+
+.task-bar {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 25px;
+
+}
+
+.btn {
+  background-color: #5680f9;
+  color: #fff;
+  padding: 5px 7px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+
+}
+
+.btn-outline {
+  background-color: #fff;
+  border: 1px solid #666a95;
+  color: #666a95;
+}
+
+.title-count {
+  display: flex;
   align-items: center;
+  gap: 10px;
+}
+
+.count {
+  width: 30px;
+  background-color: #5680f9;
+  border-radius: 5rem;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+}
+
+.title {
+  font-weight: 900;
+}
+
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(33, 33, 33, .3);
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.show-overlay {
+  display: flex;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.hidden-overlay {
+  display: none;
+}
+
+.modal-content {
+  width: 350px;
+  padding: 10px 15px;
+  background-color: #fff;
+}
+
+.modal-content .title {
+  color: #5680f9;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.choose-column-task {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.choose-column {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.input-data {
+  width: 100%;
+  padding: 10px;
+  outline: #5680f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.modal-btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo-item {
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 3px 7px 0 rgba(110, 142, 247, .13);
+  border: 1px solid #e1e2e8;
+  border-radius: 3px;
+  padding: 15px 10px;
+  margin-bottom: 15px;
+}
+
+.todo-createAt {
+  color: #666;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.todo-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+
+}
+
+.todo-actions :first-child {
+  color: #5680f9;
+  cursor: pointer;
+}
+
+.todo-actions :last-child {
+  cursor: pointer;
+  color: #ff2f2f;
+}
+
+.todo-edit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.todo-edit input[type="text"] {
+  padding: 5px;
+  margin-bottom: 0;
+}
+.done{
+  color: #00df82;
+}
+.cancel{
+  color: #333;
+}
+.hidden-edit{
+  display: none;
+}
+@media only screen and (max-width: 46.188rem) {
+  .body-app {
+
+    grid-template-columns: 1fr;
+
+
   }
-  to {
-    transform: rotate(360deg);
-  }
+
 }
