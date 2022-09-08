@@ -25,6 +25,16 @@ export const featuresSlice = createSlice({
     name: "features",
     initialState,
     reducers: {
+        dndSave: (state, action) => {
+            const {
+                sourceColIndex,
+                destinationColIndex,
+                sourceTask,
+                destinationTask,
+            } = action.payload;
+            state.data[sourceColIndex].tasks = sourceTask;
+            state.data[destinationColIndex].tasks = destinationTask;
+        },
         add: (state, action) => {
             const { payload } = action;
             const newArr = [...state.data[payload.option].tasks, payload];
@@ -60,13 +70,17 @@ export const featuresSlice = createSlice({
                 }
             });
         },
-        dnd: (state, action) => {
-            state.value = action.payload;
+        infinity: (state) => {
+            const newData = {
+                id: uuidv4(),
+                title: `todo ${uuidv4()}`,
+                createAt: moment().format("LLL"),
+            };
+            state.data[0].tasks = [...state.data[0].tasks, newData];
         },
     },
 });
 
-// Action creators are generated for each case reducer function
-export const { add, edit, dltData, dnd } = featuresSlice.actions;
+export const { add, edit, dltData, dndSave, infinity } = featuresSlice.actions;
 
 export default featuresSlice.reducer;

@@ -24,7 +24,7 @@ const Card = ({ id, option, title, createAt, onDelete }) => {
         }
     }
     function deleteData() {
-        if (window.confirm("Do you want to delele this todo?") == true) {
+        if (window.confirm("Do you want to delele this todo?") === true) {
             const deleteTodo = {
                 id,
                 option,
@@ -35,7 +35,7 @@ const Card = ({ id, option, title, createAt, onDelete }) => {
             notify(false, "Delete faild");
         }
 
-        // console.log(deleteTodo);
+   
     }
     return (
         <>
