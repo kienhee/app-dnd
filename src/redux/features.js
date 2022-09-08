@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
+import notify from "../assets/js/toast";
 const initialState = {
     data: [
         {
@@ -25,16 +26,6 @@ export const featuresSlice = createSlice({
     name: "features",
     initialState,
     reducers: {
-        dndSave: (state, action) => {
-            const {
-                sourceColIndex,
-                destinationColIndex,
-                sourceTask,
-                destinationTask,
-            } = action.payload;
-            state.data[sourceColIndex].tasks = sourceTask;
-            state.data[destinationColIndex].tasks = destinationTask;
-        },
         add: (state, action) => {
             const { payload } = action;
             const newArr = [...state.data[payload.option].tasks, payload];
@@ -70,13 +61,28 @@ export const featuresSlice = createSlice({
                 }
             });
         },
-        infinity: (state) => {
+        dndSave: (state, action) => {
+            const {
+                sourceColIndex,
+                destinationColIndex,
+                sourceTask,
+                destinationTask,
+            } = action.payload;
+            state.data[sourceColIndex].tasks = sourceTask;
+            state.data[destinationColIndex].tasks = destinationTask;
+        },
+        infinity: (state, action) => {
             const newData = {
                 id: uuidv4(),
                 title: `todo ${uuidv4()}`,
                 createAt: moment().format("LLL"),
+                option: action.payload,
             };
-            state.data[0].tasks = [...state.data[0].tasks, newData];
+            state.data[action.payload].tasks = [
+                ...state.data[action.payload].tasks,
+                newData,
+            ];
+            notify(true, "Add new success");
         },
     },
 });

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect } from "react";
 import "./App.css";
 import Modal from "./components/Modal";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -9,8 +9,6 @@ function App() {
     const data = useSelector((state) => state.features.data);
     const dispatch = useDispatch();
     const [showHiddenModal, setShowHiddenModal] = useState(true);
-    // const scrollInfinity = useRef();
-    // console.log(scrollInfinity);
     const handleShowHiddenModal = useCallback(() => {
         setShowHiddenModal(!showHiddenModal);
     }, [showHiddenModal]);
@@ -49,20 +47,18 @@ function App() {
         }
     };
 
-    function handleScrollInfinity(event) {
-        if (
-            event.currentTarget.scrollTop + event.currentTarget.offsetHeight >
-            event.currentTarget.offsetHeight - 100
-        ) {
-            dispatch(infinity());
-        } else {
-            return;
-        }
-        console.log("scrollTop: ", event.currentTarget.scrollTop);
-        console.log("offsetHeight: ", event.currentTarget.offsetHeight);
-        console.log("innerHeight: ", event.currentTarget.clientHeight);
-    }
-
+    useEffect(() => {
+        let col = document.querySelectorAll(".column");
+        col.forEach((item, index) =>
+            item.addEventListener("scroll", (event) => {
+                const { scrollTop, offsetHeight, scrollHeight } =
+                    event.currentTarget;
+                if (offsetHeight + scrollTop > scrollHeight) {
+                    dispatch(infinity(index));
+                }
+            })
+        );
+    }, []);
     return (
         <div className="App">
             <h1 className="heading">TO DO LIST</h1>
@@ -76,9 +72,6 @@ function App() {
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                     className="column"
-                                    onScroll={(event) =>
-                                        handleScrollInfinity(event)
-                                    }
                                 >
                                     <div className="column-ref">
                                         <div className="task-bar">
