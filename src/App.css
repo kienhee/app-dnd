@@ -35,7 +35,23 @@ button {
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 50px;
 }
+.search{
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+  align-items: center;
 
+}
+
+.search input{
+  padding: 10px;
+  outline: #5680f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  color: rgb(105, 102, 102);
+
+}
 .column {
   position: relative;
   width: 100%;

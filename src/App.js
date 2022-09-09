@@ -12,6 +12,7 @@ function App() {
     const handleShowHiddenModal = useCallback(() => {
         setShowHiddenModal(!showHiddenModal);
     }, [showHiddenModal]);
+    const [date, setDate] = useState("");
 
     const onDragEnd = (result) => {
         const { source, destination } = result;
@@ -47,6 +48,24 @@ function App() {
         }
     };
 
+    function handleSearchTodo() {
+        let inputSearch = document
+            .getElementById("inputSearch")
+            .value.toLowerCase();
+        let cardItem = document.querySelectorAll(".todo-item");
+        for (let i = 0; i < cardItem.length; i++) {
+            let currentItem = cardItem[i].textContent.toLowerCase();
+            if (currentItem.includes(inputSearch)) {
+                cardItem[i].style.display = "block";
+            } else {
+                cardItem[i].style.display = "none";
+            }
+        }
+    }
+    function handleSearchDate() {
+        let inputDate = document.getElementById("inputDate").value;
+        console.log(inputDate);
+    }
     useEffect(() => {
         let col = document.querySelectorAll(".column");
         col.forEach((item, index) =>
@@ -62,6 +81,21 @@ function App() {
     return (
         <div className="App">
             <h1 className="heading">TO DO LIST</h1>
+            <div className="search container">
+                <input
+                    type="date"
+                    onChange={handleSearchDate}
+                    value={date}
+                    id="inputDate"
+                />
+                <input
+                    type="search"
+                    // value={searchData}
+                    onChange={handleSearchTodo}
+                    placeholder="Search your todo...."
+                    id="inputSearch"
+                />
+            </div>
 
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className="body-app container">
