@@ -71,7 +71,10 @@ function App() {
         for (let i = 0; i < cardItem.length; i++) {
             let currentItem = cardItem[i].textContent;
             // console.log("currentItem", currentItem.includes(fomrmatDate));
-            if (currentItem.includes(fomrmatDate)) {
+            if (
+                fomrmatDate === "Invalid date" ||
+                currentItem.includes(fomrmatDate)
+            ) {
                 cardItem[i].style.display = "block";
             } else {
                 cardItem[i].style.display = "none";
@@ -94,11 +97,7 @@ function App() {
         <div className="App">
             <h1 className="heading">TO DO LIST</h1>
             <div className="search container">
-                <input
-                    type="date"
-                    onChange={handleSearchDate}
-                    id="inputDate"
-                />
+                <input type="date" onChange={handleSearchDate} id="inputDate" />
                 <input
                     type="search"
                     // value={searchData}
