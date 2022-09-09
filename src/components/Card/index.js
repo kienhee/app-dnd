@@ -34,8 +34,6 @@ const Card = ({ id, option, title, createAt, onDelete }) => {
         } else {
             notify(false, "Delete faild");
         }
-
-   
     }
     return (
         <>
@@ -43,7 +41,7 @@ const Card = ({ id, option, title, createAt, onDelete }) => {
             <div className="todo-item">
                 <div className="todo-createAt">
                     <i className="fa-solid fa-calendar-days"></i>
-                    <p>{createAt}</p>
+                    <p>{createAt}</p> <br />
                 </div>
                 <div
                     className={`todo-content ${

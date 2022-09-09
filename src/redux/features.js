@@ -7,17 +7,23 @@ const initialState = {
         {
             id: uuidv4(),
             title: " 📃 To do",
-            tasks: [],
+            tasks: [
+               
+            ],
         },
         {
             id: uuidv4(),
             title: " ✏️ In progress",
-            tasks: [],
+            tasks: [
+               
+            ],
         },
         {
             id: uuidv4(),
             title: " ✔️ Completed",
-            tasks: [],
+            tasks: [
+            
+            ],
         },
     ],
 };
@@ -55,7 +61,7 @@ export const featuresSlice = createSlice({
                     return {
                         id: (item.id = payload.id),
                         title: (item.title = payload.title),
-                        createAt: (item.createAt = moment().format("LLL")),
+                        createAt: (item.createAt = moment().format("L")),
                         option: (item.option = payload.option),
                     };
                 }
@@ -75,7 +81,7 @@ export const featuresSlice = createSlice({
             const newData = {
                 id: uuidv4(),
                 title: `todo ${uuidv4()}`,
-                createAt: moment().format("LLL"),
+                createAt: moment().format("L"),
                 option: action.payload,
             };
             state.data[action.payload].tasks = [

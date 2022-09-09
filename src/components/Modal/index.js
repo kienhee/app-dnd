@@ -27,7 +27,7 @@ function Modal({ onState, onCancel }) {
         let data = {
             id: uuidv4(),
             title: todoInput,
-            createAt: moment().format("LLL"),
+            createAt: moment().format("L"),
             option: checked,
         };
 

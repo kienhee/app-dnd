@@ -5,6 +5,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { dndSave, infinity } from "./redux/features";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "./components/Card";
+import moment from "moment";
 function App() {
     const data = useSelector((state) => state.features.data);
     const dispatch = useDispatch();
@@ -12,8 +13,6 @@ function App() {
     const handleShowHiddenModal = useCallback(() => {
         setShowHiddenModal(!showHiddenModal);
     }, [showHiddenModal]);
-    const [date, setDate] = useState("");
-
     const onDragEnd = (result) => {
         const { source, destination } = result;
 
@@ -55,6 +54,7 @@ function App() {
         let cardItem = document.querySelectorAll(".todo-item");
         for (let i = 0; i < cardItem.length; i++) {
             let currentItem = cardItem[i].textContent.toLowerCase();
+            // console.log("currentItem", currentItem);
             if (currentItem.includes(inputSearch)) {
                 cardItem[i].style.display = "block";
             } else {
@@ -64,7 +64,19 @@ function App() {
     }
     function handleSearchDate() {
         let inputDate = document.getElementById("inputDate").value;
-        console.log(inputDate);
+        let fomrmatDate = moment(inputDate).format("L");
+        console.log(inputDate, fomrmatDate);
+        let cardItem = document.querySelectorAll(".todo-item");
+
+        for (let i = 0; i < cardItem.length; i++) {
+            let currentItem = cardItem[i].textContent;
+            // console.log("currentItem", currentItem.includes(fomrmatDate));
+            if (currentItem.includes(fomrmatDate)) {
+                cardItem[i].style.display = "block";
+            } else {
+                cardItem[i].style.display = "none";
+            }
+        }
     }
     useEffect(() => {
         let col = document.querySelectorAll(".column");
@@ -85,7 +97,6 @@ function App() {
                 <input
                     type="date"
                     onChange={handleSearchDate}
-                    value={date}
                     id="inputDate"
                 />
                 <input
