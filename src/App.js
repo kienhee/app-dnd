@@ -54,7 +54,7 @@ function App() {
         let cardItem = document.querySelectorAll(".todo-item");
         for (let i = 0; i < cardItem.length; i++) {
             let currentItem = cardItem[i].textContent.toLowerCase();
-            console.log("currentItem", currentItem);
+
             if (currentItem.includes(inputSearch)) {
                 cardItem[i].style.display = "block";
             } else {
@@ -64,13 +64,14 @@ function App() {
     }
     function handleSearchDate() {
         let inputDate = document.getElementById("inputDate").value;
+
         let fomrmatDate = moment(inputDate).format("DD-MM-YYYY");
 
         let cardItem = document.querySelectorAll(".todo-item");
 
         for (let i = 0; i < cardItem.length; i++) {
             let currentItem = cardItem[i].textContent;
-            // console.log(currentItem.includes(fomrmatDate));
+
             if (
                 fomrmatDate === "Invalid date" ||
                 currentItem.includes(fomrmatDate)
@@ -82,18 +83,20 @@ function App() {
         }
     }
     useEffect(() => {
-        let col = document.querySelectorAll(".column");
+        let col = document.querySelectorAll(".task-body");
         col.forEach((item, index) =>
             item.addEventListener("scroll", (event) => {
                 const { scrollTop, offsetHeight, scrollHeight } =
                     event.currentTarget;
-                if (offsetHeight + scrollTop > scrollHeight) {
+
+                if (offsetHeight + scrollTop >= scrollHeight) {
                     dispatch(infinity(index));
                 } else {
                     return;
                 }
             })
         );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <div className="App">
@@ -118,59 +121,50 @@ function App() {
                                     ref={provided.innerRef}
                                     className="column"
                                 >
-                                    <div className="column-ref">
-                                        <div className="task-bar">
-                                            <div className="title-count">
-                                                <span className="count">
-                                                    {column.tasks?.length}
-                                                </span>
-                                                <div className="title">
-                                                    {column.title}
-                                                </div>
+                                    <div className="task-bar">
+                                        <div className="title-count">
+                                            <span className="count">
+                                                {column.tasks?.length}
+                                            </span>
+                                            <div className="title">
+                                                {column.title}
                                             </div>
-                                            <button
-                                                className="btn"
-                                                onClick={handleShowHiddenModal}
-                                            >
-                                                <i className="fa-solid fa-plus"></i>{" "}
-                                                New task
-                                            </button>
                                         </div>
-                                        <div className="task-body">
-                                            {column.tasks?.map(
-                                                (task, index) => (
-                                                    <Draggable
-                                                        key={task.id}
-                                                        draggableId={task.id}
-                                                        index={index}
-                                                    >
-                                                        {(provided) => (
-                                                            <div
-                                                                ref={
-                                                                    provided.innerRef
-                                                                }
-                                                                {...provided.draggableProps}
-                                                                {...provided.dragHandleProps}
-                                                            >
-                                                                <Card
-                                                                    id={task.id}
-                                                                    option={
-                                                                        task.option
-                                                                    }
-                                                                    title={
-                                                                        task.title
-                                                                    }
-                                                                    createAt={
-                                                                        task.createAt
-                                                                    }
-                                                                />
-                                                            </div>
-                                                        )}
-                                                    </Draggable>
-                                                )
-                                            )}
-                                        </div>
+                                        <button
+                                            className="btn"
+                                            onClick={handleShowHiddenModal}
+                                        >
+                                            <i className="fa-solid fa-plus"></i>{" "}
+                                            New task
+                                        </button>
                                     </div>
+                                    <div className="task-body">
+                                        {column.tasks?.map((task, index) => (
+                                            <Draggable
+                                                key={task.id}
+                                                draggableId={task.id}
+                                                index={index}
+                                            >
+                                                {(provided) => (
+                                                    <div
+                                                        ref={provided.innerRef}
+                                                        {...provided.draggableProps}
+                                                        {...provided.dragHandleProps}
+                                                    >
+                                                        <Card
+                                                            id={task.id}
+                                                            option={task.option}
+                                                            title={task.title}
+                                                            createAt={
+                                                                task.createAt
+                                                            }
+                                                        />
+                                                    </div>
+                                                )}
+                                            </Draggable>
+                                        ))}
+                                    </div>
+
                                     {provided.placeholder}
                                 </div>
                             )}

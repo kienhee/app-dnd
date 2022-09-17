@@ -78,9 +78,10 @@ export const featuresSlice = createSlice({
             state.data[destinationColIndex].tasks = destinationTask;
         },
         infinity: (state, action) => {
+            console.log(action);
             const newData = {
                 id: uuidv4(),
-                title: `todo ${uuidv4()}`,
+                title: `task ${Math.floor(Math.random() * 1000)}`,
                 createAt: moment().format("DD-MM-YYYY"),
                 option: action.payload,
             };
