@@ -54,7 +54,7 @@ function App() {
         let cardItem = document.querySelectorAll(".todo-item");
         for (let i = 0; i < cardItem.length; i++) {
             let currentItem = cardItem[i].textContent.toLowerCase();
-            // console.log("currentItem", currentItem);
+            console.log("currentItem", currentItem);
             if (currentItem.includes(inputSearch)) {
                 cardItem[i].style.display = "block";
             } else {
@@ -64,13 +64,13 @@ function App() {
     }
     function handleSearchDate() {
         let inputDate = document.getElementById("inputDate").value;
-        let fomrmatDate = moment(inputDate).format("L");
-        console.log(inputDate, fomrmatDate);
+        let fomrmatDate = moment(inputDate).format("DD-MM-YYYY");
+
         let cardItem = document.querySelectorAll(".todo-item");
 
         for (let i = 0; i < cardItem.length; i++) {
             let currentItem = cardItem[i].textContent;
-            // console.log("currentItem", currentItem.includes(fomrmatDate));
+            // console.log(currentItem.includes(fomrmatDate));
             if (
                 fomrmatDate === "Invalid date" ||
                 currentItem.includes(fomrmatDate)
@@ -89,6 +89,8 @@ function App() {
                     event.currentTarget;
                 if (offsetHeight + scrollTop > scrollHeight) {
                     dispatch(infinity(index));
+                } else {
+                    return;
                 }
             })
         );
@@ -100,7 +102,6 @@ function App() {
                 <input type="date" onChange={handleSearchDate} id="inputDate" />
                 <input
                     type="search"
-                    // value={searchData}
                     onChange={handleSearchTodo}
                     placeholder="Search your todo...."
                     id="inputSearch"

@@ -61,7 +61,7 @@ export const featuresSlice = createSlice({
                     return {
                         id: (item.id = payload.id),
                         title: (item.title = payload.title),
-                        createAt: (item.createAt = moment().format("L")),
+                        createAt: (item.createAt = moment().format("DD-MM-YYYY")),
                         option: (item.option = payload.option),
                     };
                 }
@@ -81,7 +81,7 @@ export const featuresSlice = createSlice({
             const newData = {
                 id: uuidv4(),
                 title: `todo ${uuidv4()}`,
-                createAt: moment().format("L"),
+                createAt: moment().format("DD-MM-YYYY"),
                 option: action.payload,
             };
             state.data[action.payload].tasks = [
